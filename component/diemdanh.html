@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Điểm Danh Sinh Viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .form-group input[type="radio"] {
+            margin-right: 5px;
+        }
+        .form-group input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 3px;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .table {
+            display: table;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table-row {
+            display: table-row;
+        }
+        .table-cell {
+            display: table-cell;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Form Điểm Danh Sinh Viên</h2>
+        <form action="/attendance" method="post">
+            <div class="table">
+                <div class="table-row">
+                    <div class="table-cell">
+                        <span id="student_name_label">John Doe</span>
+                    </div>
+                    <div class="table-cell">
+                        <label for="attended">Attended:</label>
+                        <input type="radio" id="attended" name="attendance" value="attended" required>
+                    </div>
+                    <div class="table-cell">
+                        <label for="absent">Absent:</label>
+                        <input type="radio" id="absent" name="attendance" value="absent" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top:20px;text-align: center;">
+                <input type="submit" value="Điểm Danh">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

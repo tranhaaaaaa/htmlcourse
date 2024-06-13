@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Đăng Nhập</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Đăng Nhập</h2>
+        <form id="loginForm">
+            <label for="email">Tên đăng nhập:</label>
+            <input type="text" id="email" name="email" required>
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Đăng Nhập">
+        </form>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').submit(function(event) {
+                event.preventDefault(); // Ngăn chặn form submit mặc định
+        
+                var username = $('#email').val();
+                var password = $('#password').val();
+        
+                $.ajax({
+                    url: 'https://localhost:7266/api/Account/Authenticate', 
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        username: username,
+                        password: password
+                    }),
+                    success: function(response) {
+                        // Giả sử token nằm trong response.token
+                        var token = response.token;
+                        // Lưu token vào localStorage
+                        localStorage.setItem('authToken', token);
+                        console.log('Login successful');
+                        console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Login failed');
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+
+        // Hàm để gọi API với token trong header
+        // function callProtectedApi() {
+        //     var token = localStorage.getItem('authToken');
+        //     if (!token) {
+        //         console.log('No token found, please login first.');
+        //         return;
+        //     }
+
+        //     $.ajax({
+        //         url: 'https://localhost:7266/api/protected-endpoint', 
+        //         type: 'GET',
+        //         headers: {
+        //             'Authorization': 'Bearer ' + token
+        //         },
+        //         success: function(response) {
+        //             console.log('API call successful');
+        //             console.log(response);
+        //         },
+        //         error: function(xhr, status, error) {
+        //             console.log('API call failed');
+        //             console.log(xhr.responseText);
+        //         }
+        //     });
+        // }
+
+    </script>
+</body>
+</html>
